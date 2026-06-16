@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GovPrice</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>
+        GovPrice | Planejamento de Contratações
+    </title>
 
-<link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 
@@ -17,201 +22,487 @@
 
 <div class="flex min-h-screen">
 
-    <aside class="w-64 bg-slate-900 text-white p-4">
+    <!-- SIDEBAR -->
 
-        <h1 class="text-2xl font-bold mb-8">
-            GovPrice
-        </h1>
+    <aside class="w-72 bg-slate-900 text-white flex flex-col">
 
-        <nav class="space-y-2">
+        <div class="p-6 border-b border-slate-800">
 
-            <button class="menu-btn" data-target="processo">
-                Processo
+            <h1 class="text-2xl font-black text-indigo-400">
+                GovPrice
+            </h1>
+
+            <p class="text-xs text-slate-400 mt-1">
+                Planejamento de Contratações
+            </p>
+
+        </div>
+
+        <nav class="flex-1 p-4 space-y-2">
+
+            <button class="menu-btn active" data-page="dashboard">
+                📊 Dashboard
             </button>
 
-            <button class="menu-btn" data-target="catmat">
-                CATMAT
+            <button class="menu-btn" data-page="processos">
+                📁 Processos
             </button>
 
-            <button class="menu-btn" data-target="fontes">
-                Fontes
+            <button class="menu-btn" data-page="pesquisa">
+                🔎 Pesquisa de Preços
             </button>
 
-            <button class="menu-btn" data-target="estatisticas">
-                Estatísticas
+            <button class="menu-btn" data-page="legislacao">
+                ⚖️ Legislação
             </button>
 
-            <button class="menu-btn" data-target="relatorio">
-                Relatório
+            <button class="menu-btn" data-page="relatorios">
+                📄 Relatórios
+            </button>
+
+            <button class="menu-btn" data-page="configuracoes">
+                ⚙️ Configurações
             </button>
 
         </nav>
 
     </aside>
 
-    <main class="flex-1 p-8">
+    <!-- CONTEÚDO -->
 
-        <section id="processo" class="page">
+    <main class="flex-1 overflow-auto">
 
-            <h2 class="titulo">
-                Processo
-            </h2>
+        <!-- HEADER -->
 
-            <div class="grid grid-cols-2 gap-4">
+        <header class="bg-white border-b px-8 py-4">
 
-                <input id="numeroProcesso"
-                    class="input"
-                    placeholder="Número do Processo">
+            <div class="flex justify-between items-center">
 
-                <input id="objeto"
-                    class="input"
-                    placeholder="Objeto">
+                <div>
 
-                <input id="quantidade"
-                    class="input"
-                    type="number"
-                    placeholder="Quantidade">
+                    <h2 id="pageTitle"
+                        class="text-2xl font-bold text-slate-800">
 
-                <input id="unidade"
-                    class="input"
-                    placeholder="Unidade">
+                        Dashboard
+
+                    </h2>
+
+                </div>
+
+                <div>
+
+                    <span
+                        class="text-sm text-slate-500">
+
+                        GovPrice v1.0
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- DASHBOARD -->
+
+        <section id="dashboard"
+                 class="page p-8">
+
+            <div class="grid grid-cols-4 gap-6 mb-8">
+
+                <div class="card">
+
+                    <p class="card-title">
+                        Processos
+                    </p>
+
+                    <h3 id="totalProcessos"
+                        class="card-value">
+
+                        0
+
+                    </h3>
+
+                </div>
+
+                <div class="card">
+
+                    <p class="card-title">
+                        Em Pesquisa
+                    </p>
+
+                    <h3 id="totalPesquisa"
+                        class="card-value">
+
+                        0
+
+                    </h3>
+
+                </div>
+
+                <div class="card">
+
+                    <p class="card-title">
+                        Concluídos
+                    </p>
+
+                    <h3 id="totalConcluidos"
+                        class="card-value">
+
+                        0
+
+                    </h3>
+
+                </div>
+
+                <div class="card">
+
+                    <p class="card-title">
+                        Valor Estimado
+                    </p>
+
+                    <h3 id="valorEstimado"
+                        class="card-value">
+
+                        R$ 0,00
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+            <div class="grid grid-cols-2 gap-6">
+
+                <div class="card">
+
+                    <h3 class="section-title">
+                        Processos por Status
+                    </h3>
+
+                    <canvas id="statusChart"></canvas>
+
+                </div>
+
+                <div class="card">
+
+                    <h3 class="section-title">
+                        Resumo Executivo
+                    </h3>
+
+                    <div class="space-y-3 text-sm">
+
+                        <div>
+                            Total de processos:
+                            <span id="dashTotal">
+                                0
+                            </span>
+                        </div>
+
+                        <div>
+                            Em andamento:
+                            <span id="dashAndamento">
+                                0
+                            </span>
+                        </div>
+
+                        <div>
+                            Concluídos:
+                            <span id="dashConcluidos">
+                                0
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
         </section>
 
-        <section id="catmat" class="page hidden">
+        <!-- PROCESSOS -->
 
-            <h2 class="titulo">
-                Pesquisa CATMAT
-            </h2>
+        <section id="processos"
+                 class="page hidden p-8">
 
-            <div class="flex gap-2">
+            <div class="flex justify-between mb-6">
 
-                <input id="codigoCatmat"
-                    class="input"
-                    placeholder="Código CATMAT">
+                <h3 class="section-title">
+                    Cadastro de Processos
+                </h3>
 
-                <button
-                    id="btnPesquisar"
-                    class="btn-primary">
+                <button id="btnNovoProcesso"
+                        class="btn-primary">
 
-                    Pesquisar
+                    Novo Processo
 
                 </button>
 
             </div>
 
-            <div id="resultadoCatmat"
-                class="mt-4">
+            <div class="card overflow-auto">
+
+                <table class="w-full">
+
+                    <thead>
+
+                    <tr>
+
+                        <th>Número</th>
+                        <th>Objeto</th>
+                        <th>Status</th>
+                        <th>Valor Estimado</th>
+                        <th>Ações</th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody id="processosTable">
+
+                    </tbody>
+
+                </table>
+
             </div>
 
         </section>
 
-        <section id="fontes"
-            class="page hidden">
+        <!-- PESQUISA -->
 
-            <h2 class="titulo">
-                Fontes
-            </h2>
+        <section id="pesquisa"
+                 class="page hidden p-8">
 
-            <div class="grid grid-cols-5 gap-2">
+            <div class="card">
 
-                <select id="tipoFonte"
-                    class="input">
+                <h3 class="section-title">
+                    Pesquisa CATMAT
+                </h3>
 
-                    <option>PNCP</option>
-                    <option>Fornecedor</option>
-                    <option>Contrato</option>
-                    <option>Site</option>
+                <div class="flex gap-2">
 
-                </select>
+                    <input
+                        id="codigoCatmat"
+                        class="input"
+                        placeholder="Pesquisar material">
 
-                <input id="descricaoFonte"
-                    class="input"
-                    placeholder="Descrição">
+                    <button
+                        id="btnPesquisarCatmat"
+                        class="btn-primary">
 
-                <input id="valorFonte"
-                    type="number"
-                    class="input"
-                    placeholder="Valor">
+                        Pesquisar
 
-                <input id="urlFonte"
-                    class="input"
-                    placeholder="URL">
+                    </button>
 
-                <button
-                    id="btnAdicionarFonte"
-                    class="btn-primary">
+                </div>
 
-                    Adicionar
+                <div
+                    id="resultadoCatmat"
+                    class="mt-4">
 
-                </button>
+                </div>
+
+                <div class="grid grid-cols-4 gap-4">
+
+                    <input
+                        id="codigoCatmat"
+                        class="input"
+                        placeholder="Código CATMAT">
+
+                    <button
+                        id="btnPesquisarCatmat"
+                        class="btn-primary">
+
+                        Pesquisar
+
+                    </button>
+
+                </div>
+
+                <div
+                    id="resultadoCatmat"
+                    class="mt-6">
+
+                </div>
 
             </div>
 
-            <table
-                class="w-full mt-6 bg-white">
+            <div class="card mt-6">
+
+                <h3 class="section-title">
+                    Fontes da Pesquisa
+                </h3>
+
+                <table class="w-full">
+
+                    <thead>
+
+                    <tr>
+
+                        <th>Tipo</th>
+                        <th>Descrição</th>
+                        <th>Fornecedor</th>
+                        <th>Valor</th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody id="fontesTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- LEGISLAÇÃO -->
+
+        <section
+        id="legislacao"
+        class="page hidden p-8">
+
+        <div class="flex justify-between mb-6">
+
+            <h3 class="section-title">
+                Biblioteca Jurídica
+            </h3>
+
+            <button
+                id="btnNovaLegislacao"
+                class="btn-primary">
+
+                Nova Legislação
+
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <table class="w-full">
 
                 <thead>
 
                     <tr>
+
+                        <th>Nome</th>
                         <th>Tipo</th>
-                        <th>Descrição</th>
-                        <th>Valor</th>
-                        <th>Ação</th>
+                        <th>Upload</th>
+                        <th>Ações</th>
+
                     </tr>
 
                 </thead>
 
-                <tbody id="tabelaFontes">
+                <tbody
+                id="legislacoesTable">
 
                 </tbody>
 
             </table>
 
+        </div>
+
         </section>
 
-        <section
-            id="estatisticas"
-            class="page hidden">
+        <!-- RELATÓRIOS -->
 
-            <h2 class="titulo">
-                Estatísticas
-            </h2>
+        <section id="relatorios"
+                 class="page hidden p-8">
 
-            <div
-                id="cardsEstatisticas"
-                class="grid grid-cols-4 gap-4 mb-6">
+            <div class="grid grid-cols-2 gap-6">
+
+                <div class="card">
+
+                    <h3 class="section-title">
+
+                        Relatórios
+
+                    </h3>
+
+                    <div class="space-y-3">
+
+                        <button class="btn-primary w-full">
+                            Pesquisa de Preços
+                        </button>
+
+                        <button class="btn-primary w-full">
+                            Memória de Cálculo
+                        </button>
+
+                        <button class="btn-primary w-full">
+                            Conformidade IN65
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="card">
+
+                    <h3 class="section-title">
+
+                        Visualização
+
+                    </h3>
+
+                    <div id="previewRelatorio">
+
+                        Nenhum relatório gerado.
+
+                    </div>
+
+                </div>
 
             </div>
 
-            <canvas
-                id="graficoPreco">
-
-            </canvas>
-
         </section>
 
-        <section
-            id="relatorio"
-            class="page hidden">
+        <!-- CONFIGURAÇÕES -->
 
-            <h2 class="titulo">
-                Relatório
-            </h2>
+        <section id="configuracoes"
+                 class="page hidden p-8">
 
-            <button
-                id="btnGerarRelatorio"
-                class="btn-primary">
+            <div class="card">
 
-                Gerar Relatório
+                <h3 class="section-title">
 
-            </button>
+                    Configurações
 
-            <div
-                id="saidaRelatorio"
-                class="mt-6">
+                </h3>
+
+                <div class="space-y-4">
+
+                    <input
+                        class="input"
+                        placeholder="URL API CATMAT">
+
+                    <input
+                        class="input"
+                        placeholder="URL API PNCP">
+
+                    <select class="input">
+
+                        <option>
+                            OpenAI
+                        </option>
+
+                        <option>
+                            Ollama
+                        </option>
+
+                        <option>
+                            Gemini
+                        </option>
+
+                    </select>
+
+                </div>
 
             </div>
 
@@ -221,11 +512,136 @@
 
 </div>
 
-<script src="js/storage.js"></script>
-<script src="js/calculos.js"></script>
-<script src="js/api.js"></script>
-<script src="js/conformidade.js"></script>
-<script src="js/relatorio.js"></script>
+<!-- MODAL NOVO PROCESSO -->
+
+<div id="modalProcesso"
+     class="hidden fixed inset-0 bg-black/50 flex items-center justify-center">
+
+    <div class="bg-white w-[700px] rounded-xl p-6">
+
+        <h3 class="text-xl font-bold mb-4">
+
+            Novo Processo
+
+        </h3>
+
+        <div class="grid grid-cols-2 gap-4">
+
+            <input class="input"
+                   placeholder="Número">
+
+            <input class="input"
+                   placeholder="Objeto">
+
+            <input class="input"
+                   placeholder="Secretaria">
+
+            <input class="input"
+                   placeholder="Responsável">
+
+           <select class="input">
+                <option>Planejamento</option>
+                <option>Pesquisa</option>
+                <option>TR</option>
+                <option>Licitação</option>
+                <option>Concluído</option>
+            </select>
+
+            <input class="input"
+                   placeholder="Valor Estimado">
+
+        </div>
+
+        <div class="flex justify-end mt-6 gap-2">
+
+            <button
+                id="fecharModal"
+                class="btn-secondary">
+
+                Cancelar
+
+            </button>
+
+            <button
+                class="btn-primary">
+
+                Salvar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div
+id="modalLegislacao"
+class="hidden fixed inset-0 bg-black/50 flex items-center justify-center">
+
+<div
+class="bg-white w-[700px] rounded-xl p-6">
+
+    <h3
+    class="text-xl font-bold mb-4">
+
+    Nova Legislação
+
+    </h3>
+
+    <div
+    class="grid gap-4">
+
+        <input
+        id="legNome"
+        class="input"
+        placeholder="Nome da legislação">
+
+        <input
+        id="legTipo"
+        class="input"
+        placeholder="Tipo">
+
+        <textarea
+        id="legDescricao"
+        class="input"
+        placeholder="Descrição">
+        </textarea>
+
+        <input
+        id="legArquivo"
+        type="file"
+        accept=".pdf">
+
+    </div>
+
+    <div
+    class="flex justify-end gap-2 mt-6">
+
+        <button
+        id="fecharLegislacao"
+        class="btn-secondary">
+
+        Cancelar
+
+        </button>
+
+        <button
+        id="salvarLegislacao"
+        class="btn-primary">
+
+        Salvar
+
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+<script src="js/processos.js"></script>
+<script src="js/legislacoes.js"></script>
 <script src="js/app.js"></script>
 
 </body>

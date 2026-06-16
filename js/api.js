@@ -1,24 +1,13 @@
-async function pesquisarCATMAT(codigo){
+// =====================================
+// CONFIGURAÇÃO DAS APIS
+// =====================================
 
-    try{
+const API_CONFIG = {
 
-        const url =
-        `https://dadosabertos.compras.gov.br/modulo-pesquisa-preco/1_consultarMaterial?codigoItemCatalogo=${codigo}`;
+    COMPRAS_GOV:
+    "https://dadosabertos.compras.gov.br",
 
-        const response =
-            await fetch(url);
+    MATERIAL:
+    "/modulo-pesquisa-preco/1_consultarMaterial"
 
-        const dados =
-            await response.json();
-
-        return dados;
-
-    }catch(e){
-
-        console.error(e);
-
-        return null;
-
-    }
-
-}
+};
