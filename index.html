@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GovPrice</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body class="bg-slate-100">
+
+<div class="flex min-h-screen">
+
+    <aside class="w-64 bg-slate-900 text-white p-4">
+
+        <h1 class="text-2xl font-bold mb-8">
+            GovPrice
+        </h1>
+
+        <nav class="space-y-2">
+
+            <button class="menu-btn" data-target="processo">
+                Processo
+            </button>
+
+            <button class="menu-btn" data-target="catmat">
+                CATMAT
+            </button>
+
+            <button class="menu-btn" data-target="fontes">
+                Fontes
+            </button>
+
+            <button class="menu-btn" data-target="estatisticas">
+                Estatísticas
+            </button>
+
+            <button class="menu-btn" data-target="relatorio">
+                Relatório
+            </button>
+
+        </nav>
+
+    </aside>
+
+    <main class="flex-1 p-8">
+
+        <section id="processo" class="page">
+
+            <h2 class="titulo">
+                Processo
+            </h2>
+
+            <div class="grid grid-cols-2 gap-4">
+
+                <input id="numeroProcesso"
+                    class="input"
+                    placeholder="Número do Processo">
+
+                <input id="objeto"
+                    class="input"
+                    placeholder="Objeto">
+
+                <input id="quantidade"
+                    class="input"
+                    type="number"
+                    placeholder="Quantidade">
+
+                <input id="unidade"
+                    class="input"
+                    placeholder="Unidade">
+
+            </div>
+
+        </section>
+
+        <section id="catmat" class="page hidden">
+
+            <h2 class="titulo">
+                Pesquisa CATMAT
+            </h2>
+
+            <div class="flex gap-2">
+
+                <input id="codigoCatmat"
+                    class="input"
+                    placeholder="Código CATMAT">
+
+                <button
+                    id="btnPesquisar"
+                    class="btn-primary">
+
+                    Pesquisar
+
+                </button>
+
+            </div>
+
+            <div id="resultadoCatmat"
+                class="mt-4">
+            </div>
+
+        </section>
+
+        <section id="fontes"
+            class="page hidden">
+
+            <h2 class="titulo">
+                Fontes
+            </h2>
+
+            <div class="grid grid-cols-5 gap-2">
+
+                <select id="tipoFonte"
+                    class="input">
+
+                    <option>PNCP</option>
+                    <option>Fornecedor</option>
+                    <option>Contrato</option>
+                    <option>Site</option>
+
+                </select>
+
+                <input id="descricaoFonte"
+                    class="input"
+                    placeholder="Descrição">
+
+                <input id="valorFonte"
+                    type="number"
+                    class="input"
+                    placeholder="Valor">
+
+                <input id="urlFonte"
+                    class="input"
+                    placeholder="URL">
+
+                <button
+                    id="btnAdicionarFonte"
+                    class="btn-primary">
+
+                    Adicionar
+
+                </button>
+
+            </div>
+
+            <table
+                class="w-full mt-6 bg-white">
+
+                <thead>
+
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Ação</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="tabelaFontes">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <section
+            id="estatisticas"
+            class="page hidden">
+
+            <h2 class="titulo">
+                Estatísticas
+            </h2>
+
+            <div
+                id="cardsEstatisticas"
+                class="grid grid-cols-4 gap-4 mb-6">
+
+            </div>
+
+            <canvas
+                id="graficoPreco">
+
+            </canvas>
+
+        </section>
+
+        <section
+            id="relatorio"
+            class="page hidden">
+
+            <h2 class="titulo">
+                Relatório
+            </h2>
+
+            <button
+                id="btnGerarRelatorio"
+                class="btn-primary">
+
+                Gerar Relatório
+
+            </button>
+
+            <div
+                id="saidaRelatorio"
+                class="mt-6">
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/calculos.js"></script>
+<script src="js/api.js"></script>
+<script src="js/conformidade.js"></script>
+<script src="js/relatorio.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

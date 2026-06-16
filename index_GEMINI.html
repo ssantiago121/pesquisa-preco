@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Pesquisa de Preços (IN 65/2021)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f1f5f9; }
+        .card { background: white; border: 1px solid rgba(226, 232, 240, 1); box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1); }
+        .nav-active { background: #312e81 !important; color: white !important; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+    </style>
+</head>
+<body class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <nav class="w-64 bg-slate-900 flex flex-col p-6 text-slate-400">
+        
+        <div class="text-indigo-400 text-xl font-black mb-10 flex items-center gap-2">
+            <span>GovPrice</span>
+        </div>
+        <div class="space-y-2">
+            <button onclick="changeSection('Processo', this)" class="nav-btn w-full text-left p-3 rounded-lg hover:bg-slate-800 transition-all flex items-center gap-3 active"><span>&#128188</span>Processo Licitatório</button>
+            <div class="space-x-4">
+
+                <button onclick="changeSection('intro', this)" class="nav-btn w-full text-left p-3 rounded-lg hover:bg-slate-800 transition-all flex items-center gap-3"><span>📊</span>Resumo Executivo</button>
+                <button onclick="changeSection('mapa', this)" class="nav-btn w-full text-left p-3 rounded-lg hover:bg-slate-800 transition-all flex items-center gap-3"><span>🗺️</span>Mapa de Preços</button>
+                <button onclick="changeSection('metodologia', this)" class="nav-btn w-full text-left p-3 rounded-lg hover:bg-slate-800 transition-all flex items-center gap-3"><span>⚙️</span>Metodologia</button>
+                <button onclick="changeSection('calculo', this)" class="nav-btn w-full text-left p-3 rounded-lg hover:bg-slate-800 transition-all flex items-center gap-3"><span>🧮</span>Memória de Cálculo</button>
+                <button onclick="changeSection('conformidade', this)" class="nav-btn w-full text-left p-3 rounded-lg hover:bg-slate-800 transition-all flex items-center gap-3"><span>✅</span>Conformidade</button>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <main class="flex-1 p-10 overflow-y-auto">
+        <header class="flex justify-between items-end mb-8">
+            <div>
+                <h1 class="text-3xl font-extrabold text-slate-900">Relatório de Pesquisa</h1>
+                <p class="text-slate-500">Objeto: Cadeira de Escritório Giratória</p>
+            </div>
+            <div class="card p-6 rounded-2xl">
+                <p class="text-[10px] text-slate-400 uppercase font-bold tracking-widest">Estimativa Total</p>
+                <p class="text-3xl font-black text-indigo-600">R$ 105.450,00</p>
+            </div>
+        </header>
+
+        <!-- Sections -->
+        <section id="intro" class="content-section active space-y-6">
+            <div class="grid grid-cols-4 gap-6">
+                <div class="card p-6 rounded-2xl col-span-3">
+                    <h2 class="text-xl font-bold mb-4">Resumo Executivo</h2>
+                    <p class="text-slate-600 mb-6">Este relatório atende às exigências da IN 65/2021 para aquisição de 120 unidades de cadeiras giratórias. Documento elaborado pela Equipe de Planejamento com base na pesquisa de mercado consolidada em Fortaleza/CE.</p>
+                    <div class="flex gap-4">
+                        <div class="bg-indigo-50 p-4 rounded-xl flex-1 border border-indigo-100">
+                            <p class="text-indigo-400 text-xs font-bold uppercase">Preço Unitário</p>
+                            <p class="text-xl font-black text-indigo-900">R$ 878,75</p>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-xl flex-1 border border-indigo-100">
+                            <p class="text-indigo-400 text-xs font-bold uppercase">Fontes Utilizadas</p>
+                            <p class="text-xl font-black text-indigo-900">5 Fontes</p>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-xl flex-1 border border-indigo-100">
+                            <p class="text-indigo-400 text-xs font-bold uppercase">Status</p>
+                            <p class="text-xl font-black text-indigo-900">Homologado</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-6 rounded-2xl bg-slate-900 text-white col-span-1">
+                    <h3 class="font-bold mb-4 text-indigo-300">Próximos Passos</h3>
+                    <ul class="text-sm space-y-4">
+                        <li>• Finalizar TR</li>
+                        <li>• Submissão à Jurídica</li>
+                        <li>• Publicação do Edital</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="mapa" class="content-section space-y-6">
+            <div class="card p-6 rounded-2xl overflow-x-auto">
+                <h2 class="text-xl font-bold mb-4">2. Mapa de Preços</h2>
+                <table class="w-full text-sm">
+                    <thead><tr class="text-slate-400 uppercase text-xs border-b">
+                        <th class="py-3 text-left">Fonte</th><th class="py-3 text-left">Valor</th><th class="py-3 text-left">Status</th>
+                    </tr></thead>
+                    <tbody class="divide-y">
+                        <tr><td class="py-4">PNCP/Painel</td><td class="font-bold text-slate-900">R$ 850,00</td><td class="text-green-600 font-bold">Válido</td></tr>
+                        <tr><td class="py-4">Contrato</td><td class="font-bold text-slate-900">R$ 835,00</td><td class="text-green-600 font-bold">Válido</td></tr>
+                        <tr><td class="py-4">Cotação</td><td class="font-bold text-slate-900 text-red-500 line-through">R$ 1.500,00</td><td class="text-red-600 font-bold">Descartado</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="metodologia" class="content-section space-y-6">
+            <div class="card p-6 rounded-2xl">
+                <h2 class="text-xl font-bold mb-4">3. Análise de Dispersão</h2>
+                <div class="h-64"><canvas id="saneamentoChart"></canvas></div>
+            </div>
+        </section>
+
+        <section id="calculo" class="content-section space-y-6">
+            <div class="grid grid-cols-3 gap-6">
+                <div class="card p-6 rounded-2xl text-center">
+                    <p class="text-slate-400 text-xs">Média Inicial</p>
+                    <p class="text-2xl font-black">R$ 1.003,00</p>
+                </div>
+                <div class="card p-6 rounded-2xl text-center">
+                    <p class="text-slate-400 text-xs">Desvio Padrão</p>
+                    <p class="text-2xl font-black">R$ 291,80</p>
+                </div>
+                <div class="card p-6 rounded-2xl text-center bg-indigo-600 text-white">
+                    <p class="text-indigo-200 text-xs">Preço Estimado</p>
+                    <p class="text-2xl font-black">R$ 878,75</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="conformidade" class="content-section space-y-6">
+            <div class="card p-6 rounded-2xl">
+                <h2 class="text-xl font-bold mb-4">5. Checklist de Conformidade</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-center gap-2">✅ Inciso I (Objeto)</div>
+                    <div class="flex items-center gap-2">✅ Inciso II (Objeto)</div>
+                    <div class="flex items-center gap-2">✅ Inciso III (Objeto)</div>
+                    <div class="flex items-center gap-2">✅ Inciso IV (Objeto)</div>
+                    <div class="flex items-center gap-2">✅ Inciso V (Estatística)</div>
+                    <div class="flex items-center gap-2">✅ Inciso VI (Estatística)</div>
+                    <div class="flex items-center gap-2">✅ Inciso VII (Memória)</div>
+                    <div class="flex items-center gap-2">✅ Inciso VIII (Fornecedores)</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function changeSection(id, btn) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('nav-active'));
+            btn.classList.add('nav-active');
+
+            if(id === 'metodologia') renderChart();
+        }
+
+        function renderChart() {
+            const ctx = document.getElementById('saneamentoChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['P1', 'P2', 'P3', 'P4', 'P5'],
+                    datasets: [{ data: [850, 835, 1030, 1500, 800], backgroundColor: '#6366f1' }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+        }
+    </script>
+</body>
+</html>
