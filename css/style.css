@@ -1,225 +1,166 @@
 /* ==========================
-   RESET
+   SIDEBAR & MENUS
 ========================== */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+.menu-btn {
+    width: 100%;
+    text-align: left;
+    padding: 12px 16px;
+    border-radius: 10px;
+    transition: background-color 0.2s, color 0.2s;
+    color: #cbd5e1;
 }
 
-body{
-    font-family:Inter,system-ui,sans-serif;
+.menu-btn:hover {
+    background: #1e293b;
+}
+
+.menu-btn.active {
+    background: #4f46e5;
+    color: white;
 }
 
 /* ==========================
-   SIDEBAR
+   CARDS & CONTAINERS
 ========================== */
-
-.menu-btn{
-    width:100%;
-    text-align:left;
-    padding:12px 16px;
-    border-radius:10px;
-    transition:.2s;
-    color:#cbd5e1;
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
 }
 
-.menu-btn:hover{
-    background:#1e293b;
+.card-title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #64748b;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
-.menu-btn.active{
-    background:#4f46e5;
-    color:white;
+.card-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1e293b;
+}
+
+.section-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1e293b;
 }
 
 /* ==========================
-   CARDS
+   INPUTS & FORMS
 ========================== */
-
-.card{
-    background:white;
-    border-radius:16px;
-    padding:24px;
-    box-shadow:
-        0 1px 3px rgba(0,0,0,.1);
+.input {
+    width: 100%;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.card-title{
-    font-size:.8rem;
-    text-transform:uppercase;
-    color:#64748b;
-    font-weight:600;
-    margin-bottom:10px;
-}
-
-.card-value{
-    font-size:2rem;
-    font-weight:800;
-    color:#1e293b;
-}
-
-.section-title{
-    font-size:1.2rem;
-    font-weight:700;
-    margin-bottom:20px;
-    color:#1e293b;
-}
-
-/* ==========================
-   INPUTS
-========================== */
-
-.input{
-    width:100%;
-    border:1px solid #cbd5e1;
-    border-radius:10px;
-    padding:10px 14px;
-    outline:none;
-}
-
-.input:focus{
-    border-color:#4f46e5;
-    box-shadow:0 0 0 3px rgba(79,70,229,.15);
+.input:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79,70,229,.15);
 }
 
 /* ==========================
    BOTÕES
 ========================== */
-
-.btn-primary{
-    background:#4f46e5;
-    color:white;
-    padding:10px 18px;
-    border-radius:10px;
-    font-weight:600;
-    cursor:pointer;
-    transition:.2s;
+.btn-primary {
+    background: #4f46e5;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: none;
 }
 
-.btn-primary:hover{
-    background:#4338ca;
+.btn-primary:hover {
+    background: #4338ca;
 }
 
-.btn-secondary{
-    background:#e2e8f0;
-    color:#1e293b;
-    padding:10px 18px;
-    border-radius:10px;
-    font-weight:600;
-    cursor:pointer;
+.btn-secondary {
+    background: #e2e8f0;
+    color: #1e293b;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background: #cbd5e1;
 }
 
 /* ==========================
    TABELAS
 ========================== */
-
-table{
-    border-collapse:collapse;
+table {
+    border-collapse: collapse;
+    width: 100%;
 }
 
-thead{
-    background:#f8fafc;
+thead {
+    background: #f8fafc;
 }
 
-th{
-    text-align:left;
-    padding:12px;
-    border-bottom:1px solid #e2e8f0;
-    color:#64748b;
-    font-size:.85rem;
+th {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 0.85rem;
 }
 
-td{
-    padding:12px;
-    border-bottom:1px solid #e2e8f0;
-}
-
-/* ==========================
-   STATUS
-========================== */
-
-.badge{
-    padding:5px 10px;
-    border-radius:999px;
-    font-size:.75rem;
-    font-weight:600;
-}
-
-.badge-planejamento{
-    background:#dbeafe;
-    color:#1d4ed8;
-}
-
-.badge-pesquisa{
-    background:#fef3c7;
-    color:#92400e;
-}
-
-.badge-tr{
-    background:#ede9fe;
-    color:#6d28d9;
-}
-
-.badge-licitacao{
-    background:#dcfce7;
-    color:#15803d;
-}
-
-.badge-concluido{
-    background:#dcfce7;
-    color:#166534;
+td {
+    padding: 12px;
+    border-bottom: 1px solid #e2e8f0;
 }
 
 /* ==========================
-   MODAL
+   STATUS BADGES
 ========================== */
-
-.modal-open{
-    display:flex !important;
+.badge {
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
 }
+
+.badge-planejamento { background: #dbeafe; color: #1d4ed8; }
+.badge-pesquisa     { background: #fef3c7; color: #92400e; }
+.badge-tr           { background: #ede9fe; color: #6d28d9; }
+.badge-licitacao    { background: #dcfce7; color: #15803d; }
+.badge-concluido    { background: #dcfce7; color: #166534; }
 
 /* ==========================
-   DASHBOARD
+   UTILITÁRIOS
 ========================== */
-
-.kpi-card{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
+.modal-open {
+    display: flex !important;
 }
 
-.kpi-label{
-    color:#64748b;
-    font-size:.8rem;
+.kpi-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-.kpi-number{
-    font-size:2rem;
-    font-weight:800;
+.kpi-label {
+    color: #64748b;
+    font-size: 0.8rem;
 }
 
-/* ==========================
-   RESPONSIVO
-========================== */
-
-@media(max-width:1024px){
-
-    aside{
-        width:220px !important;
-    }
-
-}
-
-@media(max-width:768px){
-
-    .grid-cols-4{
-        grid-template-columns:1fr !important;
-    }
-
-    .grid-cols-2{
-        grid-template-columns:1fr !important;
-    }
-
+.kpi-number {
+    font-size: 2rem;
+    font-weight: 800;
 }

@@ -1,56 +1,32 @@
+// ============================================================================
+// MÓDULO DE PROCESSAMENTO DE INDICADORES DE PROCESSO
+// ============================================================================
+import { media, mediana, desvioPadrao } from './calculos.js';
 
-function calcularEstatisticasProcesso(
-    processo
-){
+/**
+ * Calcula e atualiza as estatísticas de mercado com base nas fontes do processo
+ * @param {Object} processo - Objeto do processo que receberá os cálculos
+ * @returns {Object} Objeto com os indicadores calculados
+ */
+export function calcularEstatisticasProcesso(processo) {
+    if (!processo || !processo.pesquisa) return {};
 
-    const valores =
-    processo.pesquisa.fontes.map(
-        f => Number(f.valor)
-    );
+    const valores = (processo.pesquisa.fontes || []).map(f => Number(f.valor || 0));
 
-    if(valores.length === 0){
-
+    if (valores.length === 0) {
         processo.pesquisa.estatisticas = {};
-
-        return;
+        return {};
     }
 
-    processo.pesquisa.estatisticas = {
-
-        media:
-        media(valores),
-
-        mediana:
-        mediana(valores),
-
-        menor:
-        Math.min(...valores),
-
-        maior:
-        Math.max(...valores),
-
-        desvioPadrao:
-        desvioPadrao(valores)
-
+    const estatisticas = {
+        media: media(valores),
+        mediana: mediana(valores),
+        menor: Math.min(...valores),
+        maior: Math.max(...valores),
+        desvioPadrao: desvioPadrao(valores)
     };
 
-}
-
-function renderEstatisticas(){
-
-    if(!processoSelecionado)
-        return;
-
-    const stats =
-    processoSelecionado
-    .pesquisa
-    .estatisticas;
-
-    document.getElementById(
-        "media"
-    ).innerText =
-    formatarMoeda(
-        stats.media || 0
-    );
-
+    // Atualiza a referência interna do objeto
+    processo.pesquisa.estatisticas = estatisticas;
+    return estatisticas;
 }

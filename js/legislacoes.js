@@ -1,99 +1,40 @@
-// ======================================
-// LEGISLAÇÕES
-// ======================================
+// ============================================================================
+// MÓDULO DE GERENCIAMENTO DE LEGISLAÇÕES
+// ============================================================================
+import { CONFIG } from './config.js';
 
-let legislacoes =
-JSON.parse(
-    localStorage.getItem(
-        "govprice_legislacoes"
-    )
-) || [];
+export let legislacoes = JSON.parse(localStorage.getItem(CONFIG.localStorage.legislacoes)) || [];
 
-// ======================================
-// SALVAR
-// ======================================
-
-function salvarLegislacoes(){
-
-    localStorage.setItem(
-        "govprice_legislacoes",
-        JSON.stringify(legislacoes)
-    );
-
+export function salvarLegislacoes() {
+    localStorage.setItem(CONFIG.localStorage.legislacoes, JSON.stringify(legislacoes));
 }
 
-// ======================================
-// ADICIONAR
-// ======================================
+export function adicionarLegislacao(dados) {
+    const novaLegislacao = {
+        id: crypto.randomUUID(),
+        nome: dados.nome,
+        tipo: dados.tipo,
+        descricao: dados.descricao,
+        arquivo: dados.arquivo || null,
+        dataUpload: new Date().toLocaleDateString("pt-BR")
+    };
 
-function adicionarLegislacao(
-    legislacao
-){
-
-    legislacoes.push({
-
-        id:
-        crypto.randomUUID(),
-
-        nome:
-        legislacao.nome,
-
-        tipo:
-        legislacao.tipo,
-
-        descricao:
-        legislacao.descricao,
-
-        arquivo:
-        legislacao.arquivo,
-
-        dataUpload:
-        new Date()
-        .toLocaleDateString(
-            "pt-BR"
-        )
-
-    });
-
+    legislacoes.push(novaLegislacao);
     salvarLegislacoes();
-
+    return novaLegislacao;
 }
 
-// ======================================
-// REMOVER
-// ======================================
-
-function removerLegislacao(id){
-
-    legislacoes =
-    legislacoes.filter(
-        l => l.id !== id
-    );
-
+export function removerLegislacao(id) {
+    legislacoes = legislacoes.filter(l => l.id !== id);
     salvarLegislacoes();
-
-    renderLegislacoes();
-
+    // CORREÇÃO: Removido o acoplamento visual 'renderLegislacoes()'. 
+    // O controle visual da interface agora pertencerá ao controlador central (app.js).
 }
 
-// ======================================
-// BUSCAR
-// ======================================
-
-function buscarLegislacao(id){
-
-    return legislacoes.find(
-        l => l.id === id
-    );
-
+export function buscarLegislacao(id) {
+    return legislacoes.find(l => l.id === id);
 }
 
-// ======================================
-// LISTAR
-// ======================================
-
-function listarLegislacoes(){
-
+export function listarLegislacoes() {
     return legislacoes;
-
 }

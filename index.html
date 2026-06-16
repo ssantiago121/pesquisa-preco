@@ -1,648 +1,225 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>
-        GovPrice | Planejamento de Contratações
-    </title>
-
+    <title>GovPrice | Planejamento de Contratações</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <link rel="stylesheet" href="css/style.css">
-
 </head>
-
 <body class="bg-slate-100">
 
 <div class="flex min-h-screen">
-
-    <!-- SIDEBAR -->
-
     <aside class="w-72 bg-slate-900 text-white flex flex-col">
-
         <div class="p-6 border-b border-slate-800">
-
-            <h1 class="text-2xl font-black text-indigo-400">
-                GovPrice
-            </h1>
-
-            <p class="text-xs text-slate-400 mt-1">
-                Planejamento de Contratações
-            </p>
-
+            <h1 class="text-2xl font-black text-indigo-400">GovPrice</h1>
+            <p class="text-xs text-slate-400 mt-1">Planejamento de Contratações</p>
         </div>
-
         <nav class="flex-1 p-4 space-y-2">
-
-            <button class="menu-btn active" data-page="dashboard">
-                📊 Dashboard
-            </button>
-
-            <button class="menu-btn" data-page="processos">
-                📁 Processos
-            </button>
-
-            <button class="menu-btn" data-page="pesquisa">
-                🔎 Pesquisa de Preços
-            </button>
-
-            <button class="menu-btn" data-page="legislacao">
-                ⚖️ Legislação
-            </button>
-
-            <button class="menu-btn" data-page="relatorios">
-                📄 Relatórios
-            </button>
-
-            <button class="menu-btn" data-page="configuracoes">
-                ⚙️ Configurações
-            </button>
-
+            <button class="menu-btn active w-full text-left px-4 py-2 rounded hover:bg-slate-800" data-page="dashboard">📊 Dashboard</button>
+            <button class="menu-btn w-full text-left px-4 py-2 rounded hover:bg-slate-800" data-page="processos">📁 Processos</button>
+            <button class="menu-btn w-full text-left px-4 py-2 rounded hover:bg-slate-800" data-page="pesquisa">🔎 Pesquisa de Preços</button>
+            <button class="menu-btn w-full text-left px-4 py-2 rounded hover:bg-slate-800" data-page="legislacao">⚖️ Legislação</button>
+            <button class="menu-btn w-full text-left px-4 py-2 rounded hover:bg-slate-800" data-page="relatorios">📄 Relatórios</button>
+            <button class="menu-btn w-full text-left px-4 py-2 rounded hover:bg-slate-800" data-page="configuracoes">⚙️ Configurações</button>
         </nav>
-
     </aside>
 
-    <!-- CONTEÚDO -->
-
     <main class="flex-1 overflow-auto">
-
-        <!-- HEADER -->
-
         <header class="bg-white border-b px-8 py-4">
-
             <div class="flex justify-between items-center">
-
                 <div>
-
-                    <h2 id="pageTitle"
-                        class="text-2xl font-bold text-slate-800">
-
-                        Dashboard
-
-                    </h2>
-
+                    <h2 id="pageTitle" class="text-2xl font-bold text-slate-800">Dashboard</h2>
                 </div>
-
                 <div>
-
-                    <span
-                        class="text-sm text-slate-500">
-
-                        GovPrice v1.0
-
-                    </span>
-
+                    <span class="text-sm text-slate-500">GovPrice v1.0</span>
                 </div>
-
             </div>
-
         </header>
 
-        <!-- DASHBOARD -->
-
-        <section id="dashboard"
-                 class="page p-8">
-
+        <section id="dashboard" class="page p-8 block">
             <div class="grid grid-cols-4 gap-6 mb-8">
-
-                <div class="card">
-
-                    <p class="card-title">
-                        Processos
-                    </p>
-
-                    <h3 id="totalProcessos"
-                        class="card-value">
-
-                        0
-
-                    </h3>
-
+                <div class="card bg-white p-6 rounded-lg shadow-sm border">
+                    <p class="card-title text-sm text-slate-500 mb-2">Processos</p>
+                    <h3 id="totalProcessos" class="card-value text-2xl font-bold">0</h3>
                 </div>
-
-                <div class="card">
-
-                    <p class="card-title">
-                        Em Pesquisa
-                    </p>
-
-                    <h3 id="totalPesquisa"
-                        class="card-value">
-
-                        0
-
-                    </h3>
-
+                <div class="card bg-white p-6 rounded-lg shadow-sm border">
+                    <p class="card-title text-sm text-slate-500 mb-2">Em Pesquisa</p>
+                    <h3 id="totalPesquisa" class="card-value text-2xl font-bold">0</h3>
                 </div>
-
-                <div class="card">
-
-                    <p class="card-title">
-                        Concluídos
-                    </p>
-
-                    <h3 id="totalConcluidos"
-                        class="card-value">
-
-                        0
-
-                    </h3>
-
+                <div class="card bg-white p-6 rounded-lg shadow-sm border">
+                    <p class="card-title text-sm text-slate-500 mb-2">Concluídos</p>
+                    <h3 id="totalConcluidos" class="card-value text-2xl font-bold">0</h3>
                 </div>
-
-                <div class="card">
-
-                    <p class="card-title">
-                        Valor Estimado
-                    </p>
-
-                    <h3 id="valorEstimado"
-                        class="card-value">
-
-                        R$ 0,00
-
-                    </h3>
-
+                <div class="card bg-white p-6 rounded-lg shadow-sm border">
+                    <p class="card-title text-sm text-slate-500 mb-2">Valor Estimado</p>
+                    <h3 id="valorEstimado" class="card-value text-2xl font-bold">R$ 0,00</h3>
                 </div>
-
             </div>
 
             <div class="grid grid-cols-2 gap-6">
-
-                <div class="card">
-
-                    <h3 class="section-title">
-                        Processos por Status
-                    </h3>
-
+                <div class="card bg-white p-6 rounded-lg shadow-sm border">
+                    <h3 class="section-title text-lg font-bold mb-4">Processos por Status</h3>
                     <canvas id="statusChart"></canvas>
-
                 </div>
-
-                <div class="card">
-
-                    <h3 class="section-title">
-                        Resumo Executivo
-                    </h3>
-
+                <div class="card bg-white p-6 rounded-lg shadow-sm border">
+                    <h3 class="section-title text-lg font-bold mb-4">Resumo Executivo</h3>
                     <div class="space-y-3 text-sm">
-
-                        <div>
-                            Total de processos:
-                            <span id="dashTotal">
-                                0
-                            </span>
-                        </div>
-
-                        <div>
-                            Em andamento:
-                            <span id="dashAndamento">
-                                0
-                            </span>
-                        </div>
-
-                        <div>
-                            Concluídos:
-                            <span id="dashConcluidos">
-                                0
-                            </span>
-                        </div>
-
+                        <div>Total de processos: <span id="dashTotal" class="font-bold">0</span></div>
+                        <div>Em andamento: <span id="dashAndamento" class="font-bold">0</span></div>
+                        <div>Concluídos: <span id="dashConcluidos" class="font-bold">0</span></div>
                     </div>
-
                 </div>
-
             </div>
-
         </section>
 
-        <!-- PROCESSOS -->
-
-        <section id="processos"
-                 class="page hidden p-8">
-
+        <section id="processos" class="page hidden p-8">
             <div class="flex justify-between mb-6">
-
-                <h3 class="section-title">
-                    Cadastro de Processos
-                </h3>
-
-                <button id="btnNovoProcesso"
-                        class="btn-primary">
-
-                    Novo Processo
-
-                </button>
-
+                <h3 class="section-title text-xl font-bold">Cadastro de Processos</h3>
+                <button id="btnNovoProcesso" class="btn-primary bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Novo Processo</button>
             </div>
-
-            <div class="card overflow-auto">
-
-                <table class="w-full">
-
-                    <thead>
-
-                    <tr>
-
-                        <th>Número</th>
-                        <th>Objeto</th>
-                        <th>Status</th>
-                        <th>Valor Estimado</th>
-                        <th>Ações</th>
-
-                    </tr>
-
+            <div class="card bg-white rounded-lg shadow-sm border overflow-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-slate-50 border-b">
+                        <tr>
+                            <th class="p-4">Número</th>
+                            <th class="p-4">Objeto</th>
+                            <th class="p-4">Status</th>
+                            <th class="p-4">Valor Estimado</th>
+                            <th class="p-4">Ações</th>
+                        </tr>
                     </thead>
-
-                    <tbody id="processosTable">
-
+                    <tbody id="processosTable" class="divide-y divide-slate-100">
                     </tbody>
-
                 </table>
-
             </div>
-
         </section>
 
-        <!-- PESQUISA -->
-
-        <section id="pesquisa"
-                 class="page hidden p-8">
-
-            <div class="card">
-
-                <h3 class="section-title">
-                    Pesquisa CATMAT
-                </h3>
-
+        <section id="pesquisa" class="page hidden p-8">
+            <div class="card bg-white p-6 rounded-lg shadow-sm border">
+                <h3 class="section-title text-xl font-bold mb-4">Pesquisa CATMAT / Compras Gov</h3>
+                
                 <div class="flex gap-2">
-
-                    <input
-                        id="codigoCatmat"
-                        class="input"
-                        placeholder="Pesquisar material">
-
-                    <button
-                        id="btnPesquisarCatmat"
-                        class="btn-primary">
-
-                        Pesquisar
-
-                    </button>
-
+                    <input id="codigoCatmat" class="input flex-1 border border-slate-300 rounded px-4 py-2" placeholder="Pesquisar material ou código CATMAT">
+                    <button id="btnPesquisarCatmat" class="btn-primary bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Pesquisar</button>
                 </div>
-
-                <div
-                    id="resultadoCatmat"
-                    class="mt-4">
-
-                </div>
-
-                <div class="grid grid-cols-4 gap-4">
-
-                    <input
-                        id="codigoCatmat"
-                        class="input"
-                        placeholder="Código CATMAT">
-
-                    <button
-                        id="btnPesquisarCatmat"
-                        class="btn-primary">
-
-                        Pesquisar
-
-                    </button>
-
-                </div>
-
-                <div
-                    id="resultadoCatmat"
-                    class="mt-6">
-
-                </div>
-
+                <div id="resultadoCatmat" class="mt-4"></div>
             </div>
 
-            <div class="card mt-6">
-
-                <h3 class="section-title">
-                    Fontes da Pesquisa
-                </h3>
-
-                <table class="w-full">
-
-                    <thead>
-
-                    <tr>
-
-                        <th>Tipo</th>
-                        <th>Descrição</th>
-                        <th>Fornecedor</th>
-                        <th>Valor</th>
-
-                    </tr>
-
+            <div class="card bg-white p-6 rounded-lg shadow-sm border mt-6">
+                <h3 class="section-title text-xl font-bold mb-4">Fontes da Pesquisa</h3>
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-slate-50 border-b">
+                        <tr>
+                            <th class="p-4">Tipo</th>
+                            <th class="p-4">Descrição</th>
+                            <th class="p-4">Fornecedor</th>
+                            <th class="p-4">Valor</th>
+                        </tr>
                     </thead>
-
-                    <tbody id="fontesTable">
-
+                    <tbody id="fontesTable" class="divide-y divide-slate-100">
                     </tbody>
-
                 </table>
-
             </div>
-
         </section>
 
-        <!-- LEGISLAÇÃO -->
-
-        <section
-        id="legislacao"
-        class="page hidden p-8">
-
-        <div class="flex justify-between mb-6">
-
-            <h3 class="section-title">
-                Biblioteca Jurídica
-            </h3>
-
-            <button
-                id="btnNovaLegislacao"
-                class="btn-primary">
-
-                Nova Legislação
-
-            </button>
-
-        </div>
-
-        <div class="card">
-
-            <table class="w-full">
-
-                <thead>
-
-                    <tr>
-
-                        <th>Nome</th>
-                        <th>Tipo</th>
-                        <th>Upload</th>
-                        <th>Ações</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody
-                id="legislacoesTable">
-
-                </tbody>
-
-            </table>
-
-        </div>
-
+        <section id="legislacao" class="page hidden p-8">
+            <div class="flex justify-between mb-6">
+                <h3 class="section-title text-xl font-bold">Biblioteca Jurídica</h3>
+                <button id="btnNovaLegislacao" class="btn-primary bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Nova Legislação</button>
+            </div>
+            <div class="card bg-white rounded-lg shadow-sm border">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-slate-50 border-b">
+                        <tr>
+                            <th class="p-4">Nome</th>
+                            <th class="p-4">Tipo</th>
+                            <th class="p-4">Upload</th>
+                            <th class="p-4">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="legislacoesTable" class="divide-y divide-slate-100">
+                    </tbody>
+                </table>
+            </div>
         </section>
 
-        <!-- RELATÓRIOS -->
-
-        <section id="relatorios"
-                 class="page hidden p-8">
-
+        <section id="relatorios" class="page hidden p-8">
             <div class="grid grid-cols-2 gap-6">
-
-                <div class="card">
-
-                    <h3 class="section-title">
-
-                        Relatórios
-
-                    </h3>
-
+                <div class="card bg-white p-6 rounded-lg shadow-sm border">
+                    <h3 class="section-title text-xl font-bold mb-4">Relatórios</h3>
                     <div class="space-y-3">
-
-                        <button class="btn-primary w-full">
-                            Pesquisa de Preços
-                        </button>
-
-                        <button class="btn-primary w-full">
-                            Memória de Cálculo
-                        </button>
-
-                        <button class="btn-primary w-full">
-                            Conformidade IN65
-                        </button>
-
+                        <button class="btn-primary bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 w-full">Pesquisa de Preços</button>
+                        <button class="btn-primary bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 w-full">Memória de Cálculo</button>
+                        <button class="btn-primary bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 w-full">Conformidade IN65</button>
                     </div>
-
                 </div>
-
-                <div class="card">
-
-                    <h3 class="section-title">
-
-                        Visualização
-
-                    </h3>
-
-                    <div id="previewRelatorio">
-
-                        Nenhum relatório gerado.
-
-                    </div>
-
+                <div class="card bg-white p-6 rounded-lg shadow-sm border">
+                    <h3 class="section-title text-xl font-bold mb-4">Visualização</h3>
+                    <div id="previewRelatorio" class="text-slate-500">Nenhum relatório gerado.</div>
                 </div>
-
             </div>
-
         </section>
 
-        <!-- CONFIGURAÇÕES -->
-
-        <section id="configuracoes"
-                 class="page hidden p-8">
-
-            <div class="card">
-
-                <h3 class="section-title">
-
-                    Configurações
-
-                </h3>
-
+        <section id="configuracoes" class="page hidden p-8">
+            <div class="card bg-white p-6 rounded-lg shadow-sm border">
+                <h3 class="section-title text-xl font-bold mb-4">Configurações</h3>
                 <div class="space-y-4">
-
-                    <input
-                        class="input"
-                        placeholder="URL API CATMAT">
-
-                    <input
-                        class="input"
-                        placeholder="URL API PNCP">
-
-                    <select class="input">
-
-                        <option>
-                            OpenAI
-                        </option>
-
-                        <option>
-                            Ollama
-                        </option>
-
-                        <option>
-                            Gemini
-                        </option>
-
+                    <input class="input w-full border border-slate-300 rounded px-4 py-2" placeholder="URL API CATMAT">
+                    <input class="input w-full border border-slate-300 rounded px-4 py-2" placeholder="URL API PNCP">
+                    <select class="input w-full border border-slate-300 rounded px-4 py-2">
+                        <option>OpenAI</option>
+                        <option>Ollama</option>
+                        <option>Gemini</option>
                     </select>
-
                 </div>
-
             </div>
-
         </section>
-
     </main>
-
 </div>
 
-<!-- MODAL NOVO PROCESSO -->
-
-<div id="modalProcesso"
-     class="hidden fixed inset-0 bg-black/50 flex items-center justify-center">
-
+<div id="modalProcesso" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center">
     <div class="bg-white w-[700px] rounded-xl p-6">
-
-        <h3 class="text-xl font-bold mb-4">
-
-            Novo Processo
-
-        </h3>
-
+        <h3 class="text-xl font-bold mb-4">Novo Processo</h3>
         <div class="grid grid-cols-2 gap-4">
-
-            <input class="input"
-                   placeholder="Número">
-
-            <input class="input"
-                   placeholder="Objeto">
-
-            <input class="input"
-                   placeholder="Secretaria">
-
-            <input class="input"
-                   placeholder="Responsável">
-
-           <select class="input">
+            <input class="input border border-slate-300 rounded px-4 py-2" placeholder="Número">
+            <input class="input border border-slate-300 rounded px-4 py-2" placeholder="Objeto">
+            <input class="input border border-slate-300 rounded px-4 py-2" placeholder="Secretaria">
+            <input class="input border border-slate-300 rounded px-4 py-2" placeholder="Responsável">
+            <select class="input border border-slate-300 rounded px-4 py-2">
                 <option>Planejamento</option>
                 <option>Pesquisa</option>
                 <option>TR</option>
                 <option>Licitação</option>
                 <option>Concluído</option>
             </select>
-
-            <input class="input"
-                   placeholder="Valor Estimado">
-
+            <input class="input border border-slate-300 rounded px-4 py-2" placeholder="Valor Estimado">
         </div>
-
         <div class="flex justify-end mt-6 gap-2">
-
-            <button
-                id="fecharModal"
-                class="btn-secondary">
-
-                Cancelar
-
-            </button>
-
-            <button
-                class="btn-primary">
-
-                Salvar
-
-            </button>
-
+            <button id="fecharModal" class="btn-secondary border border-slate-300 px-4 py-2 rounded hover:bg-slate-50">Cancelar</button>
+            <button class="btn-primary bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Salvar</button>
         </div>
-
     </div>
-
 </div>
 
-<div
-id="modalLegislacao"
-class="hidden fixed inset-0 bg-black/50 flex items-center justify-center">
-
-<div
-class="bg-white w-[700px] rounded-xl p-6">
-
-    <h3
-    class="text-xl font-bold mb-4">
-
-    Nova Legislação
-
-    </h3>
-
-    <div
-    class="grid gap-4">
-
-        <input
-        id="legNome"
-        class="input"
-        placeholder="Nome da legislação">
-
-        <input
-        id="legTipo"
-        class="input"
-        placeholder="Tipo">
-
-        <textarea
-        id="legDescricao"
-        class="input"
-        placeholder="Descrição">
-        </textarea>
-
-        <input
-        id="legArquivo"
-        type="file"
-        accept=".pdf">
-
+<div id="modalLegislacao" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center">
+    <div class="bg-white w-[700px] rounded-xl p-6">
+        <h3 class="text-xl font-bold mb-4">Nova Legislação</h3>
+        <div class="grid gap-4">
+            <input id="legNome" class="input border border-slate-300 rounded px-4 py-2" placeholder="Nome da legislação">
+            <input id="legTipo" class="input border border-slate-300 rounded px-4 py-2" placeholder="Tipo">
+            <textarea id="legDescricao" class="input border border-slate-300 rounded px-4 py-2" placeholder="Descrição"></textarea>
+            <input id="legArquivo" type="file" accept=".pdf">
+        </div>
+        <div class="flex justify-end gap-2 mt-6">
+            <button id="fecharLegislacao" class="btn-secondary border border-slate-300 px-4 py-2 rounded hover:bg-slate-50">Cancelar</button>
+            <button id="salvarLegislacao" class="btn-primary bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Salvar</button>
+        </div>
     </div>
-
-    <div
-    class="flex justify-end gap-2 mt-6">
-
-        <button
-        id="fecharLegislacao"
-        class="btn-secondary">
-
-        Cancelar
-
-        </button>
-
-        <button
-        id="salvarLegislacao"
-        class="btn-primary">
-
-        Salvar
-
-        </button>
-
-    </div>
-
 </div>
 
-</div>
-
-<script src="js/processos.js"></script>
-<script src="js/legislacoes.js"></script>
-<script src="js/app.js"></script>
+<script type="module" src="/app.js"></script>
 
 </body>
 </html>
