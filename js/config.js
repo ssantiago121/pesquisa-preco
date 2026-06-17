@@ -3,11 +3,11 @@
 // =====================================
 
 export const CONFIG = {
-    nomeSistema: "GovPrice",
+    nomeSistema: "BalizaGov",
     versao: "1.0",
     localStorage: {
-        processos: "govprice_processos",
-        legislacoes: "govprice_legislacoes"
+        processos: "balizagov_processos",
+        legislacoes: "balizagov_legislacoes"
     },
     status: [
         "Planejamento",

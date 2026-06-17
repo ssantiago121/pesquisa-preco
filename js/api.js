@@ -9,44 +9,75 @@ export const API_CONFIG = {
 
 export async function consultarMaterialCatmat(termo, pagina = 1) {
     const termoLimpo = termo?.toString().trim();
-    if (!termoLimpo) return null;
-
-    const ehCodigo = /^\d+$/.test(termoLimpo);
-    if (!ehCodigo) {
-        console.error("A API de Pesquisa de Preços exige um Código CATMAT numérico válido.");
-        alert("Por favor, insira um código numérico válido (ex: 331).");
+    if (!termoLimpo || !/^\d+$/.test(termoLimpo)) {
+        alert("Informe um código numérico válido.");
         return null;
     }
 
-    // 1. Declaramos exatamente a targetUrl aqui
-    const targetUrl = new URL(`${API_CONFIG.COMPRAS_GOV}${API_CONFIG.MATERIAL}`);
-    targetUrl.searchParams.append('pagina', pagina.toString());
-    targetUrl.searchParams.append('tamanhoPagina', '10');
-    targetUrl.searchParams.append('codigoItemCatalogo', termoLimpo);
-    targetUrl.searchParams.append('dataResultado', 'false');
-
-    // 2. Usamos a targetUrl aqui dentro da string do Proxy
-    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(targetUrl.toString())}`;
+    // URL Direta (Sem proxy)
+    const url = new URL("https://dadosabertos.compras.gov.br/modulo-pesquisa-preco/1_consultarMaterial");
+    url.searchParams.append('pagina', pagina.toString());
+    url.searchParams.append('tamanhoPagina', '10');
+    url.searchParams.append('codigoItemCatalogo', termoLimpo);
+    url.searchParams.append('dataResultado', 'false');
 
     try {
-        const response = await fetch(proxyUrl, {
+        const response = await fetch(url, {
             method: 'GET',
-            headers: {
-                'accept': '*/*'
-            }
+            headers: { 'accept': '*/*' }
         });
 
-        if (!response.ok) {
-            console.error(`Erro na requisição: Status ${response.status}`);
-            return null;
-        }
+        if (!response.ok) throw new Error(`Status ${response.status}`);
 
         const dados = await response.json();
-        console.log("Dados recebidos (via Proxy):", dados);
-        
         return dados;
     } catch (error) {
-        console.error("Falha de conexão:", error);
+        console.error("Falha ao buscar direto da API:", error);
         return null;
     }
 }
+
+// export async function consultarMaterialCatmat(termo, pagina = 1) {
+//     const termoLimpo = termo?.toString().trim();
+//     if (!termoLimpo) return null;
+
+//     if (!/^\d+$/.test(termoLimpo)) {
+//         alert("Por favor, insira um código numérico válido.");
+//         return null;
+//     }
+
+//     // 1. Monta a URL Oficial do Compras Gov
+//     const targetUrl = new URL(`${API_CONFIG.COMPRAS_GOV}${API_CONFIG.MATERIAL}`);
+//     targetUrl.searchParams.append('pagina', pagina.toString());
+//     targetUrl.searchParams.append('tamanhoPagina', '10');
+//     targetUrl.searchParams.append('codigoItemCatalogo', termoLimpo);
+//     targetUrl.searchParams.append('dataResultado', 'false');
+
+//     // 2. Proxy Seguro (AllOrigins /get)
+//     const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl.toString())}`;
+
+//     try {
+//         const response = await fetch(proxyUrl);
+
+//         if (!response.ok) {
+//             console.error(`Erro no Proxy: Status ${response.status}`);
+//             return null;
+//         }
+
+//         // O AllOrigins retorna um JSON com a propriedade "contents" contendo os dados reais
+//         const wrapper = await response.json();
+        
+//         if (wrapper.contents) {
+//             // Converte a string do governo de volta para JSON
+//             const dados = JSON.parse(wrapper.contents);
+//             console.log(`Sucesso! Dados oficiais do código ${termoLimpo}:`, dados);
+//             return dados;
+//         } else {
+//             console.error("A API retornou vazio.");
+//             return null;
+//         }
+//     } catch (error) {
+//         console.error("Falha de conexão estrutural:", error);
+//         return null;
+//     }
+// }

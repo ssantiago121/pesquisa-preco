@@ -50,7 +50,10 @@ function configurarNavegacaoSPA() {
             document.getElementById(pageId).classList.remove("hidden");
             btn.classList.add("active");
 
-            document.getElementById("pageTitle").innerText = btn.innerText.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]|\p{Emoji_Presentation}/gu, '').trim();
+            // document.getElementById("pageTitle").innerText = btn.innerText.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]|\p{Emoji_Presentation}/gu, '').trim();
+
+            // Substitua a linha do pageTitle por esta:
+            document.getElementById("pageTitle").innerText = btn.innerText.replace(/[^\w\sà-úÀ-Ú]/gi, '').trim();
             
             // Sempre que entrar na aba de pesquisa, atualiza as informações do processo logado
             if (pageId === "pesquisa") {
@@ -103,6 +106,10 @@ function atualizarGrafico() {
                 ],
                 backgroundColor: ['#3b82f6', '#f59e0b', '#8b5cf6', '#10b981', '#166534']
             }]
+        },
+        options: {
+            maintainAspectRatio: false, // <-- ADICIONE ESTA LINHA AQUI
+            responsive: true
         }
     });
 }
@@ -213,8 +220,16 @@ function renderResultadoCatmat(dados) {
     const container = document.getElementById("resultadoCatmat");
     itensAtuaisCatmat = dados?.resultado || []; // Alimenta nosso array de controle por índice
 
-    if (itensAtuaisCatmat.length === 0) {
-        container.innerHTML = `<div class="p-4 bg-amber-50 text-amber-700 rounded border border-amber-200">Nenhum registro de preço encontrado para este código no Compras Gov.</div>`;
+    // if (itensAtuaisCatmat.length === 0) {
+    //     container.innerHTML = `<div class="p-4 bg-amber-50 text-amber-700 rounded border border-amber-200">Nenhum registro de preço encontrado para este código no Compras Gov.</div>`;
+    //     return;
+    // }
+
+    // Lendo do lugar certinho que a API do governo retorna!
+    const itens = dados?.resultado || [];
+
+    if (!itens || itens.length === 0) {
+        container.innerHTML = `<div class="p-4 bg-red-50 text-red-600 rounded">Nenhum registro de preço encontrado para este código.</div>`;
         return;
     }
 

@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GovPrice | Planejamento de Contratações</title>
+    <title>BalizaGov | Planejamento de Contratações</title>
+    <link rel="shortcut icon" href="/favicon3.png" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-slate-100">
+<body class="bg-slate-100 h-screen overflow-hidden">
 
-<div class="flex min-h-screen">
+<div class="flex h-screen w-full">
     <aside class="w-72 bg-slate-900 text-white flex flex-col">
         <div class="p-6 border-b border-slate-800">
-            <h1 class="text-2xl font-black text-indigo-400">GovPrice</h1>
+            <!-- <h1 class="text-2xl font-black text-indigo-400">BalizaGov</h1> -->
+            <img src="baliz-logo.png" alt="Baliz" class="h-16 object-contain">
             <p class="text-xs text-slate-400 mt-1">Planejamento de Contratações</p>
         </div>
         <nav class="flex-1 p-4 space-y-2">
@@ -26,20 +28,21 @@
         </nav>
     </aside>
 
-    <main class="flex-1 overflow-auto">
-        <header class="bg-white border-b px-8 py-4">
-            <div class="flex justify-between items-center">
+    <main class="flex-1 flex flex-col h-full overflow-hidden">
+        <header class="bg-white border-b px-8 py-4 shrink-0">
+            <div class="flex-1 overflow-y-auto relative w-full">
                 <div>
                     <h2 id="pageTitle" class="text-2xl font-bold text-slate-800">Dashboard</h2>
                 </div>
                 <div>
-                    <span class="text-sm text-slate-500">GovPrice v1.0</span>
+                    <span class="text-sm text-slate-500">BalizaGov v1.0</span>
                 </div>
             </div>
         </header>
 
-        <section id="dashboard" class="page p-8 block">
-            <div class="grid grid-cols-4 gap-6 mb-8">
+       <section id="dashboard" class="page p-8 h-full flex flex-col">
+            
+            <div class="grid grid-cols-4 gap-6 mb-6 shrink-0">
                 <div class="card bg-white p-6 rounded-lg shadow-sm border">
                     <p class="card-title text-sm text-slate-500 mb-2">Processos</p>
                     <h3 id="totalProcessos" class="card-value text-2xl font-bold">0</h3>
@@ -58,19 +61,33 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 gap-6">
-                <div class="card bg-white p-6 rounded-lg shadow-sm border">
-                    <h3 class="section-title text-lg font-bold mb-4">Processos por Status</h3>
-                    <canvas id="statusChart"></canvas>
-                </div>
-                <div class="card bg-white p-6 rounded-lg shadow-sm border">
-                    <h3 class="section-title text-lg font-bold mb-4">Resumo Executivo</h3>
-                    <div class="space-y-3 text-sm">
-                        <div>Total de processos: <span id="dashTotal" class="font-bold">0</span></div>
-                        <div>Em andamento: <span id="dashAndamento" class="font-bold">0</span></div>
-                        <div>Concluídos: <span id="dashConcluidos" class="font-bold">0</span></div>
+            <div class="grid grid-cols-2 gap-6 flex-1 min-h-0">
+                
+                <div class="card bg-white p-6 rounded-lg shadow-sm border flex flex-col h-full">
+                    <h3 class="section-title text-lg font-bold mb-4 shrink-0">Processos por Status</h3>
+                    <div class="relative flex-1 w-full min-h-0 flex items-center justify-center">
+                        <canvas id="statusChart"></canvas>
                     </div>
                 </div>
+
+                <div class="card bg-white p-6 rounded-lg shadow-sm border flex flex-col h-full">
+                    <h3 class="section-title text-lg font-bold mb-4 shrink-0">Resumo Executivo</h3>
+                    <div class="space-y-3 text-sm flex-1 overflow-auto">
+                        <div class="flex justify-between border-b pb-2">
+                            <span class="text-slate-600">Total de processos:</span> 
+                            <span id="dashTotal" class="font-bold text-slate-900">0</span>
+                        </div>
+                        <div class="flex justify-between border-b pb-2">
+                            <span class="text-slate-600">Em andamento:</span> 
+                            <span id="dashAndamento" class="font-bold text-slate-900">0</span>
+                        </div>
+                        <div class="flex justify-between border-b pb-2">
+                            <span class="text-slate-600">Concluídos:</span> 
+                            <span id="dashConcluidos" class="font-bold text-slate-900">0</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
